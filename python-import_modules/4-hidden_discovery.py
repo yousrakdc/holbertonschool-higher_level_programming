@@ -2,6 +2,6 @@
 import hidden_4
 
 if __name__ == "__main__":
-    for secret in dir(hidden_4):
-        if secret[0] != "_":
-            print(secret)
+    for content in dir(hidden_4):
+        if content[:2] != "__":
+            print("{:s}".format(content))
