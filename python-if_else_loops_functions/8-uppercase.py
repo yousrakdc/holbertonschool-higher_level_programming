@@ -13,8 +13,3 @@ def uppercase(str):
 
     uppercase_str = ''.join(uppercase_chars)
     print("{}".format(uppercase_str))
-
-
-uppercase("best")
-
-uppercase("best school 98 battery street")
