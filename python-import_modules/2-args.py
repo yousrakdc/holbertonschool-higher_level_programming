@@ -5,8 +5,12 @@ import sys
 def main():
     argv = sys.argv
 
+    num_args = len(argv) - 1
+
     if num_args == 1:
         print("1 argument:")
+    elif num_args == 0:
+        print("0 argument:")
     else:
         print("{} arguments:".format(num_args))
 
