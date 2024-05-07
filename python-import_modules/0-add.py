@@ -5,3 +5,7 @@ def add(a, b):
 
     result = add(a, b)
     print(f"{a} + {b} = {result}")
+
+
+if __name__ == "__main__":
+    main()
