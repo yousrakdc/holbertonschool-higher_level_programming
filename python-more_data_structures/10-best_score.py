@@ -5,7 +5,7 @@ def best_score(a_dictionary):
         return None
 
     best_key = None
-    best_value = floa('-inf')
+    best_value = float('-inf')
 
     for key, value in a_dictionary.items():
         if value > best_value:
