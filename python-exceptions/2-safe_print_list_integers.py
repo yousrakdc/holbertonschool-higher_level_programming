@@ -1,15 +1,16 @@
 #!/usr/bin/python3
 def safe_print_list_integers(my_list=[], x=0):
     count = 0
+    printed_elements = []
+
     try:
         for i in range(x):
-            try:
-                print("{:d}".format(my_list[i]), end=' ')
+            element = my_list[i]
+            if isinstance(element, int):
+                printed_elements.append(str(element))
                 count += 1
-            except (ValueError, TypeError):
-                pass
     except IndexError:
         pass
-    finally:
-        print()
+
+    print("{:d}".format(", ".join(printed_elements)))
     return count
