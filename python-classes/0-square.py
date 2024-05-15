@@ -3,5 +3,5 @@
 
 
 class Square:
-    "Empty square in Python"
+    "First empty square in Python"
     None
