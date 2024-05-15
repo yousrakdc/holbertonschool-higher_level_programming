@@ -1,6 +1,8 @@
 #!/usr/bin/python3
+"""square advanced task, pls send help"""
 
-class Square():
+
+class Square:
     def __init__(self, size=0, position=(0, 0)):
         self.size = size
         self.position = position
@@ -23,8 +25,8 @@ class Square():
 
     @position.setter
     def position(self, value):
-        if not (isinstance(value, tuple) and len(value) == 2 and 
-                all(isinstance(num, int) for num in value) and 
+        if not (isinstance(value, tuple) and len(value) == 2 and
+                all(isinstance(num, int) for num in value) and
                 all(num >= 0 for num in value)):
             raise TypeError("position must be a tuple of 2 positive integers")
         self._position = value
