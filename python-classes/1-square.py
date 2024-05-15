@@ -3,5 +3,9 @@
 
 
 class Square:
+    "Define a private size attribute"
     def __init__(self, size):
+        "Square initialization"
         self.__size = size
+
+    pass
