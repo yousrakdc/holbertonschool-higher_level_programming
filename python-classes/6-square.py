@@ -1,12 +1,18 @@
 #!/usr/bin/python3
-"""Class Square that defines a square"""
+"""Class Square that makes a square"""
 
 
 class Square():
     "Define a private size attribute"
-    def __init__(self, size=0):
+    def __init__(self, size=0, position=(0, 0)):
         "Square initialization"
-        self.__size = size
+
+        self.size = size
+        self.position = position
+
+    @property
+    def size(self):
+        return self.__size
 
     @size.setter
     def size(self, value):
