@@ -15,17 +15,15 @@
     """
 
     Tests to check if they are ints:
-    
-    >>> add_integer(3, 5)
-    8
-    >>> add_integer(3.5, 4.5)
-    7
-    >>> add_integer(3)
-    101
-    >>> add_integer(-2, 3.5)
-    1
-    >>> add_integer(100)
-    198
+
+    >>> add_integer(1, 2)
+    3
+    >>> add_integer(100, -2)
+    98
+    >>> add_integer(2)
+    100
+    >>> add_integer(100.3, -2)
+    98
 
     Tests to verify failure: 
 
