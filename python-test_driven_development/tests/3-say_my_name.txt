@@ -1,29 +1,22 @@
 >>> say_my_name = __import__('3-say_my_name').say_my_name
 
-Print the provided first and last name (if provided) in a formatted string.
+>>> say_my_name("John", "Smith")
+My name is John Smith
 
-    Parameters:
-        first_name (str): The first name to be printed.
-        last_name (str, optional): The last name to be printed. Defaults to an empty string.
+>>> say_my_name("Bob")
+My name is Bob 
 
-    Raises:
-        TypeError: If either first_name or last_name is not a string.
+>>> say_my_name(None, "Blue")
+Traceback (most recent call last):
+    ...
+TypeError: first_name must be a string
 
-    Returns:
-        None
+>>> say_my_name("White", 12)
+Traceback (most recent call last):
+...
+TypeError: last_name must be a string
 
-    >>> say_my_name("John", "Doe")
-    My name is John Doe
-
-    >>> say_my_name("Alice")
-    My name is Alice 
-
-    >>> say_my_name(123)
-    Traceback (most recent call last):
-        ...
-    TypeError: first_name must be a string
-
-    >>> say_my_name("Bob", 456)
-    Traceback (most recent call last):
-        ...
-    TypeError: last_name must be a string
+>>> say_my_name()
+Traceback (most recent call last):
+    ...
+TypeError: say_my_name() missing 1 required positional argument: 'first_name'
