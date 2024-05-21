@@ -1,17 +1,17 @@
 #!/usr/bin/python3
-"""Defines a rectangle class."""
+""" defines rectangle"""
 
 
 class Rectangle:
-    """Represents a rectangle."""
+    """Represents a rectangle. """
 
     number_of_instances = 0
     print_symbol = "#"
 
     def __init__(self, width=0, height=0):
         """ initializes rectangle """
-        self.height = height
         self.width = width
+        self.height = height
         Rectangle.number_of_instances += 1
 
     @property
@@ -27,7 +27,7 @@ class Rectangle:
     @height.setter
     def height(self, value):
         """ set height with new value """
-        if not isinstance(value, int):
+        if type(value) is not int:
             raise TypeError("height must be an integer")
         if value < 0:
             raise ValueError("height must be >= 0")
@@ -36,7 +36,7 @@ class Rectangle:
     @width.setter
     def width(self, value):
         """ set width with new value """
-        if not isinstance(value, int):
+        if type(value) is not int:
             raise TypeError("width must be an integer")
         if value < 0:
             raise ValueError("width must be >= 0")
@@ -70,11 +70,8 @@ class Rectangle:
 
     def __del__(self):
         """ deletion of instance """
-    try:
         Rectangle.number_of_instances -= 1
-    except Exception:
-        pass
-    print("Bye rectangle...")
+        print("Bye rectangle...")
 
     @staticmethod
     def bigger_or_equal(rect_1, rect_2):
