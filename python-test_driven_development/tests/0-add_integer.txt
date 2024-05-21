@@ -1,0 +1,47 @@
+>>> add_integer = __import__('0-add_integer').add_integer
+
+    """
+    Adds two integers or floats, casting them to integers if necessary.
+
+    Parameters:
+    a (int, float): The first number.
+    b (int, float): The second number, defaults to 98.
+
+    Returns:
+    int: The sum of the two numbers after casting them to integers.
+
+    Raises:
+    TypeError: If either a or b is not an integer or float.
+    """
+
+    Tests to check if they are ints:
+    >>> add_integer(3, 5)
+    8
+    >>> add_integer(3.5, 4.5)
+    7
+    >>> add_integer(3)
+    101
+    >>> add_integer(-2, 3.5)
+    1
+    >>> add_integer(100)
+    198
+
+    Tests to verify failure: 
+    
+    >>> add_integer(3, 'a')
+    Traceback (most recent call last):
+        ...
+    TypeError: b must be an integer
+    >>> add_integer('a', 3)
+    Traceback (most recent call last):
+        ...
+    TypeError: a must be an integer
+    >>> add_integer(None, 3)
+    Traceback (most recent call last):
+        ...
+    TypeError: a must be an integer
+    >>> add_integer()
+    Traceback (most recent call last):
+        ...
+    TypeError: add_integer() missing 1 required positional argument: 'a'
+
