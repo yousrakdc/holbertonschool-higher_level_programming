@@ -15,16 +15,16 @@ def matrix_divided(matrix, div):
         raise TypeError("matrix must be a matrix (list of lists) "
                         "of integers/floats")
 
+    if not isinstance(div, (int, float)):
+        raise TypeError("div must be a number")
+
     if not all(len(row) == len(matrix[0]) for row in matrix):
         raise TypeError("Each row of the matrix must have the same size")
 
     if not all(isinstance(num, (int, float))
                for row in matrix for num in row):
-        raise TypeError("Each element of the matrix must be an "
-                        "integer or float")
-
-    if not isinstance(div, (int, float)):
-        raise TypeError("div must be a number")
+        raise TypeError("matrix must be a matrix (list of lists) "
+                        "of integers/floats")
 
     if div == 0:
         raise ZeroDivisionError("division by zero")
