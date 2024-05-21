@@ -6,6 +6,8 @@
         a, b = integers
         b = 98
 """
+
+
 def add_integer(a, b=98):
     """Check if a is an integer or a float"""
     if not isinstance(a, (int, float)):
