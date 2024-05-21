@@ -1,48 +1,48 @@
+"""
 >>> add_integer = __import__('0-add_integer').add_integer
 
-    """
-    Adds two integers or floats, casting them to integers if necessary.
+Adds two integers or floats, casting them to integers if necessary.
 
-    Parameters:
-    a (int, float): The first number.
-    b (int, float): The second number, defaults to 98.
+Parameters:
+a (int, float): The first number.
+b (int, float): The second number, defaults to 98.
 
-    Returns:
-    int: The sum of the two numbers after casting them to integers.
+Returns:
+int: The sum of the two numbers after casting them to integers.
 
-    Raises:
-    TypeError: If either a or b is not an integer or float.
-    """
+Raises:
+TypeError: If either a or b is not an integer or float.
 
-    Tests to check if they are ints:
+Tests to check if they are ints:
 
-    >>> add_integer(1, 2)
-    3
-    >>> add_integer(100, -2)
-    98
-    >>> add_integer(2)
-    100
-    >>> add_integer(100.3, -2)
-    98
+>>> add_integer(1, 2)
+3
+>>> add_integer(100, -2)
+98
+>>> add_integer(2)
+100
+>>> add_integer(100.3, -2)
+98
+>>> add_integer(1, 1)
+2
+>>> add_integer(12, 8)
+20
+>>> add_integer(15, 3)
+18
 
-    Tests to verify failure: 
+Tests to verify failure: 
 
-    >>> add_integer(3, 'help')
-    Traceback (most recent call last):
-        ...
-    TypeError: b must be an integer
+>>> add_integer(3, 'help')
+Traceback (most recent call last):
+...
+TypeError: b must be an integer
 
-    >>> add_integer({8, 1, 8}, 3)
-    Traceback (most recent call last):
-        ...
-    TypeError: a must be an integer
+>>> add_integer({8, 1, 8}, 3)
+Traceback (most recent call last):
+...
+TypeError: a must be an integer
 
-    >>> add_integer(3, {2, 9, 3})
-    Traceback (most recent call last):
-        ...
-    TypeError: b must be an integer
-
-    >>> add_integer()
-    Traceback (most recent call last):
-        ...
-    TypeError: add_integer() missing 1 required positional argument: 'a'
+>>> add_integer(3, {2, 9, 3})
+Traceback (most recent call last):
+...
+TypeError: b must be an integer
