@@ -2,7 +2,7 @@
 """ defined rectangle"""
 
 
-class Rectangle:
+class Rectangle():
     """ defined rectangle"""
     pass
 
