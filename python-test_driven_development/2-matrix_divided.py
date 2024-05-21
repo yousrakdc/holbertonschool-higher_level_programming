@@ -10,7 +10,6 @@ def matrix_divided(matrix, div):
         matrix (list): matrix to divide
         div (int, float): number to divide by
     """
-
     if not isinstance(matrix, list) or \
        not all(isinstance(row, list) for row in matrix):
         raise TypeError("matrix must be a matrix (list of lists) "
