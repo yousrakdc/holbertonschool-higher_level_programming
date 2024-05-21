@@ -9,14 +9,16 @@ def text_indentation(text):
         raise TypeError("text must be a string")
 
     special_chars = {'.', '?', ':'}
-
     result = ""
-    for char in text:
-        result += char
-        if char in special_chars:
+    i = 0
+    while i < len(text):
+        result += text[i]
+        if text[i] in special_chars:
             result += "\n\n"
+            i += 1
+            while i < len(text) and text[i] == ' ':
+                i += 1
+            continue
+        i += 1
 
-    lines = [line.strip() for line in result.split("\n")]
-    formatted_text = "\n".join(lines)
-
-    print(formatted_text)
+    print(result, end='')
