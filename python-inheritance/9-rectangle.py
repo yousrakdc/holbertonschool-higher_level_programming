@@ -22,4 +22,7 @@ def area(self):
 
 def __str__(self):
     """str"""
-    return f"[Rectangle] {self.__width}/{self.__height}"
+    a = str(self.__width)
+    b = str(self.__height)
+    return "[" + __class__.__name__ + "] " \
+        + a + "/" + b
