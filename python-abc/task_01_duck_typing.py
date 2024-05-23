@@ -20,9 +20,7 @@ class Shape(ABC):
 class Circle(Shape):
     """implements the area and perimeter methods"""
     def __init__(self, radius):
-        if radius < 0:
-            raise ValueError("Radius cannot be negative")
-        self.radius = radius
+        self.radius = abs(radius)
 
     def area(self):
         """Calculate the area of the circle."""
