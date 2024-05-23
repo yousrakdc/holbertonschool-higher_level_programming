@@ -57,8 +57,11 @@ def shape_info(shape):
 def test_circle_negative():
     """in case of negative radius"""
     try:
-        circle_negative = Circle(-5)
+        circle_negative = Circle(radius=-5)
     except ValueError as e:
         assert str(e) == "Radius cannot be negative"
     else:
         assert False, "ValueError not raised for negative radius"
+
+
+test_circle_negative()
