@@ -48,12 +48,6 @@ class Rectangle(Shape):
         return 2 * (self.width + self.height)
 
 
-def shape_info(shape):
-    """Define the shape_info function"""
-    print(f"Area: {shape.area()}")
-    print(f"Perimeter: {shape.perimeter()}")
-
-
 def test_circle_negative():
     """in case of negative radius"""
     try:
@@ -64,4 +58,7 @@ def test_circle_negative():
         assert False, "ValueError not raised for negative radius"
 
 
-test_circle_negative()
+def shape_info(shape):
+    """Define the shape_info function"""
+    print(f"Area: {shape.area()}")
+    print(f"Perimeter: {shape.perimeter()}")
