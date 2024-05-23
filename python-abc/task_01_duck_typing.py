@@ -5,6 +5,7 @@ import math
 
 """Shapes, Interfaces, and Duck Typing"""
 
+
 class Shape(ABC):
     """define shape"""
     @abstractmethod
@@ -15,9 +16,12 @@ class Shape(ABC):
     def perimeter(self):
         pass
 
+
 class Circle(Shape):
     """implements the area and perimeter methods"""
     def __init__(self, radius):
+        if radius < 0:
+            raise ValueError("Radius cannot be negative")
         self.radius = radius
 
     def area(self):
@@ -27,6 +31,7 @@ class Circle(Shape):
     def perimeter(self):
         """Calculate the perimeter (circumference) of the circle."""
         return self.radius * 2 * math.pi
+
 
 class Rectangle(Shape):
     """Create the Rectangle class"""
@@ -41,6 +46,7 @@ class Rectangle(Shape):
     def perimeter(self):
         """Calculate the perimeter of the rectangle."""
         return 2 * (self.width + self.height)
+
 
 def shape_info(shape):
     """Define the shape_info function"""
