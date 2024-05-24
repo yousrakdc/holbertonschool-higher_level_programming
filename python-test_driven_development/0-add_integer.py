@@ -9,16 +9,18 @@
 
 
 def add_integer(a, b=98):
-    """Check if a is an integer or a float"""
-    if not isinstance(a, (int, float)):
+
+    """ add two integers or flots """
+    if type(a) is not int and type(a) is not float:
         raise TypeError("a must be an integer")
 
-    """Check if b is an integer or a float"""
-    if not isinstance(b, (int, float)):
+    if type(b) is not int and type(b) is not float:
         raise TypeError("b must be an integer")
 
-    """ Cast both a and b to integers if they are floats"""
-    a0 = int(a)
-    b0 = int(b)
+    if type(a) is float:
+        a = int(a)
 
-    return a0 + b0
+    if type(b) is float:
+        b = int(b)
+
+    return (a + b)
