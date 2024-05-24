@@ -46,3 +46,10 @@ TypeError: a must be an integer
 Traceback (most recent call last):
 ...
 TypeError: b must be an integer
+
+>>> a = float("inf")
+>>> b = 10
+>>> add_integer(a, b)
+Traceback (most recent call last):
+...
+OverflowError: cannot convert float infinity to integer
