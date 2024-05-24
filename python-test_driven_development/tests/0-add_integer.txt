@@ -32,25 +32,20 @@ Tests to check if they are ints:
 
 Tests to verify failure: 
 
->>> add_integer(3, 'help')
-Traceback (most recent call last):
-...
-TypeError: b must be an integer
-
->>> add_integer(6, '3')
-Traceback (most recent call last):
-...
-TypeError: b must be an integer
-
->>> add_integer({8, 1, 8}, 3)
+>>> add_integer("3", 5)
 Traceback (most recent call last):
 ...
 TypeError: a must be an integer
 
->>> add_integer(3, {2, 9, 3})
+>>> add_integer(3, "5")
 Traceback (most recent call last):
 ...
 TypeError: b must be an integer
+
+>>> add_integer("3", "5")
+Traceback (most recent call last):
+...
+TypeError: a must be an integer
 
 >>> a = float("inf")
 >>> b = 10
