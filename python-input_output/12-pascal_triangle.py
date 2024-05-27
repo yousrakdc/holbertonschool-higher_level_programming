@@ -18,7 +18,7 @@ def pascal_triangle(n):
             """Calculate the values for the current row"""
             row.append(prev_row[j - 1] + prev_row[j])
 
-        row.append(1)
-        triangle.append(row)
+            row.append(1)
+            triangle.append(row)
 
-    return triangle
+            return triangle
