@@ -13,7 +13,7 @@ def pascal_triangle(n):
         if i > 0:
             n = len(triangle)
 
-        for j in range(1, i):
+        for j in range(n - 1):
             """Calculate the values for the current row"""
             row.append(triangle[j + 1] + triangle[i][j])
 
