@@ -4,6 +4,7 @@ reprensenting the Pascal's triangle of n"""
 
 
 def pascal_triangle(n):
+    """returns an empty list"""
     if n > 0:
         triangle = [[1]]
 
@@ -12,12 +13,11 @@ def pascal_triangle(n):
         row = [1]
         if i > 0:
             n = len(triangle)
-
-        for j in range(n - 1):
-            """Calculate the values for the current row"""
-            row.append(triangle[i][j] + triangle[j + 1])
+            for j in range(n - 1):
+                """Calculate the values for the current row"""
+                row.append(triangle[i][j] + triangle[j + 1])
 
             row.append(1)
             triangle.append(row)
-
-            return triangle
+        return triangle
+    return []
