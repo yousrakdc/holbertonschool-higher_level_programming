@@ -4,28 +4,16 @@ reprensenting the Pascal's triangle of n"""
 
 
 def pascal_triangle(n):
-    triangle = list()
-
-    if n <= 0:
-        return triangle
-
+    """function to find Pascal's Triangle integers"""
     if n > 0:
-        triangle.append([1])
-
-    # Add second line.
-    if n > 1:
-        triangle.append([1, 1])
-
-    for x in range(3, n+1):
-        triangle.append([0] * x)
-
-        # Set first and last 1
-        triangle[x-1][0] = 1
-        triangle[x-1][x-1] = 1
-
-        # Calculate middle numbers
-        for y in range(1, x-1):
-            triangle[x-1][y] = \
-                triangle[x-2][y-1] + triangle[x-2][y]
-
-    return triangle
+        triangle = [[1]]
+        for i in range(n - 1):
+            my_list = [1]
+            if i > 0:
+                n = len(triangle)
+                for j in range(n - 1):
+                    my_list.append(triangle[i][j] + triangle[i][j + 1])
+            my_list.append(1)
+            triangle.append(my_list)
+        return triangle
+    return []
