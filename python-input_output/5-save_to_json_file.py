@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""module with function to save string to file"""
+"""function to save string to file"""
 import json
 
 
