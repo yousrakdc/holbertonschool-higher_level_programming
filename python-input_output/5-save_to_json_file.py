@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """function to append string to file"""
 
+
 import json
 
 
