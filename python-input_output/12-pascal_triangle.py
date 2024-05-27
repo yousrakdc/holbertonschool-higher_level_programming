@@ -4,15 +4,28 @@ reprensenting the Pascal's triangle of n"""
 
 
 def pascal_triangle(n):
-    triangle = []
+    triangle = list()
+
     if n <= 0:
         return triangle
-    triangle = [[1]]
-    for i in range(1, n):
-        temp = [1]
-        for j in range(len(triangle[i - 1]) - 1):
-            curr = triangle[i - 1]
-            temp.append(triangle[i - 1][j] + triangle[i - 1][j + 1])
-        temp.append(1)
-        triangle.append(temp)
+
+    if n > 0:
+        triangle.append([1])
+
+    # Add second line.
+    if n > 1:
+        triangle.append([1, 1])
+
+    for x in range(3, n+1):
+        triangle.append([0] * x)
+
+        # Set first and last 1
+        triangle[x-1][0] = 1
+        triangle[x-1][x-1] = 1
+
+        # Calculate middle numbers
+        for y in range(1, x-1):
+            triangle[x-1][y] = \
+                triangle[x-2][y-1] + triangle[x-2][y]
+
     return triangle
