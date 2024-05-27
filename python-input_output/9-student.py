@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 """Write a class Student that defines a student"""
 
-import json
-
 
 class Student:
     """Initializes a Student instance with first name, last name, and age."""
