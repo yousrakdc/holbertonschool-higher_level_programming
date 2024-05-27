@@ -4,21 +4,21 @@ reprensenting the Pascal's triangle of n"""
 
 
 def pascal_triangle(n):
-    if n <= 0:
-        return []
+    if n > 0:
+        triangle = [[1]]
 
-    triangle = [[1]]
-
-    for i in range(1, n):
+    for i in range(1 - n):
         """Each row starts with 1"""
         row = [1]
-        prev_row = triangle[-1]
+        if i > 0:
+            n = len(triangle)
 
         for j in range(1, i):
             """Calculate the values for the current row"""
-            row.append(prev_row[j - 1] + prev_row[j])
+            row.append(triangle[j + 1] + triangle[i][j])
 
             row.append(1)
             triangle.append(row)
 
             return triangle
+        return []
