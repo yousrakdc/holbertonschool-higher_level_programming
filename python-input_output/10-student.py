@@ -10,9 +10,9 @@ class Student:
             return self.__dict__
         else:
             return {
-                "first_name": self.first_name,
-                "last_name": self.last_name,
-                "age": self.age
+                val: value
+                for val, value in self.__dict__.items()
+                if val in attrs
             }
 
     def __init__(self, first_name, last_name, age):
