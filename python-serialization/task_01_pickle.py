@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # Pickling Custom Classes
 import pickle
 
@@ -16,18 +18,15 @@ class CustomObject:
     def serialize(self, filename):
         try:
             with open('filename', 'wb') as file:
-                pickle.dump(file)
-                print(f"Object serialized and saved to '{filename}'")
+                pickle.dump(self, file)
         except Exception as e:
-            print(f"Failed to serialize object: {e}")
+            return None
 
     @classmethod
     def deserialize(cls, filename):
         try:
             with open('filename', 'rb') as file:
                 obj = pickle.load(file)
-                print(f"Object deserialized from '{filename}'")
                 return obj
-        except (FileNotFoundError, pickle.UnipicklingError) as e:
-            print(f"Failed to deserialize object: {e}")
+        except (FileNotFoundError, pickle.UnpicklingError) as e:
             return None
