@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 """Serialize and deserialize data"""
 
-import pickle
+import json
 
 
 def serialize_and_save_to_file(data, filename):
-    """serialize and save"""
-    with open(filename, 'wb') as file:
-        pickle.dump(data, file)
+    """Serializes a Python dictionary to a JSON file."""
+    with open(filename, 'w') as file:
+        json.dump(data, file)
 
 
 def load_and_deserialize(filename):
     """deserialize"""
-    with open(filename, 'rb') as file:
-        deserialized_data = pickle.load(file)
-    return deserialized_data
+    with open(filename, 'r') as file:
+        data = json.load(file)
+    return data
