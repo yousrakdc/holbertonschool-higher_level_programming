@@ -32,3 +32,9 @@ def convert_value(value):
         return float(value)
     except ValueError:
         return value
+
+
+dictionary = {'name': 'John', 'age': 30, 'city': 'New York'}
+serialize_to_xml(dictionary, 'data.xml')
+deserialized_dict = deserialize_from_xml('data.xml')
+print(deserialized_dict)
