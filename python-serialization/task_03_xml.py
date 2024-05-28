@@ -18,23 +18,7 @@ def deserialize_from_xml(filename):
     """deserialize"""
     tree = ET.parse(filename)
     root = tree.getroot()
-    result = {}
+    deserialized_data = {}
     for child in root:
-        result[child.tag] = convert_value(child.text)
-    return result
-
-
-def convert_value(value):
-    """convert the values"""
-    if value.isdigit():
-        return int(value)
-    try:
-        return float(value)
-    except ValueError:
-        return value
-
-
-dictionary = {'name': 'John', 'age': 30, 'city': 'New York'}
-serialize_to_xml(dictionary, 'data.xml')
-deserialized_dict = deserialize_from_xml('data.xml')
-print(deserialized_dict)
+        deserialized_data[child.tag] = child.text
+    return deserialized_data
