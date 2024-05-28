@@ -6,7 +6,7 @@ import pickle
 
 def serialize_and_save_to_file(data, filename):
     """serialize and save"""
-    with open('filename', 'wb') as file:
+    with open(filename, 'wb') as file:
         pickle.dump(data, file)
         print(f"Data serialized and saved to {filename}")
 
