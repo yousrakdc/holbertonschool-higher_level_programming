@@ -29,6 +29,7 @@ class CustomObject:
         """deserialize"""
         try:
             with open(filename, 'rb') as file:
-                pickle.load(file)
+                data = pickle.load(file)
+                return data
         except (FileNotFoundError, pickle.UnpicklingError):
             return None
