@@ -20,7 +20,7 @@ class CustomObject:
         """serialize"""
         try:
             with open(filename, 'wb') as file:
-                pickle.dump(self, file)
+                return pickle.dump(self, file)
         except Exception as e:
             print(f"Error serializing object: {e}")
             return None
