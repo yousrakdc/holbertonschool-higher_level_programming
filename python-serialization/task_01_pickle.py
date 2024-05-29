@@ -4,17 +4,6 @@ import pickle
 
 
 class CustomObject:
-    def __init__(self, name, age, is_student):
-        """initialization"""
-        self.name = name
-        self.age = age
-        self.is_student = is_student
-
-    def display(self):
-        """display"""
-        print(f"Name: {self.name}")
-        print(f"Age: {self.age}")
-        print(f"Is Student: {self.is_student}")
 
     def serialize(self, filename):
         """serialize"""
@@ -31,5 +20,17 @@ class CustomObject:
             with open(filename, 'rb') as file:
                 data = pickle.load(file)
                 return data
-        except (FileNotFoundError, pickle.UnpicklingError):
+        except (FileNotFoundError, pickle.UnpicklingError, EOFError):
             return None
+
+    def __init__(self, name, age, is_student):
+        """initialization"""
+        self.name = name
+        self.age = age
+        self.is_student = is_student
+
+    def display(self):
+        """display"""
+        print(f"Name: {self.name}")
+        print(f"Age: {self.age}")
+        print(f"Is Student: {self.is_student}")
