@@ -3,6 +3,7 @@
 import http.server  # Basic web server capabilities
 import socketserver  # TCP server functionalities
 import json  # JSON handling capabilities
+import logging
 
 PORT = 8000
 
@@ -34,13 +35,16 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
             self.wfile.write(json.dumps(response).encode())
         else:
             """Other paths: Return a 404 Not Found response"""
-            self.send_response(404)
-            self.send_header("Content-type", "text/plain")
-            self.end_headers()
-            self.wfile.write(b"Endpoint not found")
+            self.send_error(404, "Endpoint not found")
+            logging.warning(f"Requested path: {self.path}")
 
 
 """Create and start the server"""
 with socketserver.TCPServer(("", PORT), MyHandler) as httpd:
-    print(f"Serving on port {PORT}")
-    httpd.serve_forever()
+    logging.info(f"Serving on port {PORT}")
+    try:
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        logging.info("Server stopped by user")
+    finally:
+        httpd.server_close()
