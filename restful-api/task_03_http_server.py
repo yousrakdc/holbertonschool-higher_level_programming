@@ -2,7 +2,7 @@
 """Develop a simple API using Python with the `http.server` module"""
 import http.server  # Basic web server capabilities
 import socketserver  # TCP server functionalities
-import json  # JSON handling capabilities
+import orjson  # JSON handling capabilities
 import logging
 
 PORT = 8000
@@ -25,14 +25,14 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
             self.send_header("Content-type", "application/json")
             self.end_headers()
             response = {"name": "John", "age": 30, "city": "New York"}
-            self.wfile.write(json.dumps(response).encode())
+            self.wfile.write(orjson.dumps(response).encode())
         elif self.path == "/status":
             """'/status' path: Return a status JSON object"""
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
             response = {"status": "OK"}
-            self.wfile.write(json.dumps(response).encode())
+            self.wfile.write(orjson.dumps(response).encode())
         else:
             """Other paths: Return a 404 Not Found response"""
             self.send_error(404, "Endpoint not found")
