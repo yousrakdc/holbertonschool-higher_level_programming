@@ -32,7 +32,10 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
 
     def handle_root(self) -> None:
         """Handle root path"""
-        self.send_json_response({"message": "Hello, this is a simple API!"})
+        self.send_response(200)
+        self.send_header("Content-type", "text/plain")
+        self.end_headers()
+        self.wfile.write(b"Hello, this is a simple API!")
 
     def handle_data(self) -> None:
         """Handle '/data' path"""
