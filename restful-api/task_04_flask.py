@@ -29,14 +29,14 @@ def home():
 @app.route('/data', methods=['GET'])
 def get_users():
     """Endpoint to get the list of all users."""
-    user_list = [user for user in users.values()]
+    user_list = [user for user in users.keys()]
     return jsonify(user_list)
 
 
 @app.route('/status', methods=['GET'])
 def get_status():
     """Endpoint to check the API status."""
-    return jsonify({"status": "OK"})
+    return "OK"
 
 
 @app.route('/users/<username>', methods=['GET'])
@@ -53,12 +53,10 @@ def add_user():
     """Endpoint to add a new user."""
     user_data = request.get_json()
     username = user_data.get('username')
-    if not username:
-        return jsonify({"error": "Username is required"}), 400
     if username in users:
         return jsonify({"error": "User already exists"}), 409
     users[username] = user_data
-    return jsonify({"message": "User added", "user": user_data}), 201
+    return jsonify({"message": "User added", "user": user_data})
 
 
 if __name__ == '__main__':
