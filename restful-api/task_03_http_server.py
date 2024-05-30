@@ -34,6 +34,12 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
                 "version": "1.0",
                 "description": "A simple API built with http.server"}
             self.wfile.write(json.dumps(response).encode())
+        elif self.path == "/status":
+            self.send_response(200)
+            self.send_header("Content-type", "application/json")
+            self.end_headers()
+            response = {"status": "OK"}
+            self.wfile.write(json.dumps(response).encode())
         else:
             """Other paths: Return a 404 Not Found response"""
             self.send_response(404)
