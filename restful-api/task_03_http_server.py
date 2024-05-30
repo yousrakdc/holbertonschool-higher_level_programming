@@ -1,9 +1,6 @@
-#!/usr/bin/env python3
-"""Develop a simple API using Python with the `http.server` module"""
 import http.server
 import socketserver
 import json
-from typing import Dict, Tuple
 
 PORT = 8000
 
@@ -11,7 +8,7 @@ PORT = 8000
 class MyHandler(http.server.BaseHTTPRequestHandler):
     """Request handler class"""
 
-    def send_json_response(self, data: Dict, status_code: int = 200) -> None:
+    def send_json_response(self, data: dict, status_code: int = 200) -> None:
         """Helper method to send a JSON response"""
         self.send_response(status_code)
         self.send_header("Content-type", "application/json")
@@ -52,12 +49,14 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
 
     def handle_status(self) -> None:
         """Handle '/status' path"""
-        self.send_json_response({"status": "OK"})
+        self.send_response(200)
+        self.send_header("Content-type", "text/plain")
+        self.end_headers()
+        self.wfile.write(b"OK")
 
     def handle_not_found(self) -> None:
         """Handle undefined paths"""
-        self.send_json_response({"error": "Endpoint not found"},
-                                status_code=404)
+        self.send_error(404, "Endpoint not found")
 
 
 """Create and start the server"""
