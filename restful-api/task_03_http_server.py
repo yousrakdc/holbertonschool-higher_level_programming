@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+"""Develop a simple API using Python with the `http.server` module"""
 import http.server  # Basic web server capabilities
 import socketserver  # TCP server functionalities
 import json  # JSON handling capabilities
