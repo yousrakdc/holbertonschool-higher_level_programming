@@ -37,14 +37,3 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
             """Other paths: Return a 404 Not Found response"""
             self.send_error(404, "Endpoint not found")
             logging.warning(f"Requested path: {self.path}")
-
-
-"""Create and start the server"""
-with socketserver.TCPServer(("", PORT), MyHandler) as httpd:
-    logging.info(f"Serving on port {PORT}")
-    try:
-        httpd.serve_forever()
-    except KeyboardInterrupt:
-        logging.info("Server stopped by user")
-    finally:
-        httpd.server_close()
