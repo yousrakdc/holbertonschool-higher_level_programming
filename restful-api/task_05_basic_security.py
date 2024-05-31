@@ -38,7 +38,7 @@ def verify_password(username, password):
     return None
 
 
-@app.route('/login', methods=['POST'])
+@app.route('/login')
 def login():
     """Endpoint for user login."""
     data = request.get_json()
