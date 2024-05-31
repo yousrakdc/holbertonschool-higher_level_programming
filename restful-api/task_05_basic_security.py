@@ -33,28 +33,20 @@ def verify_password(username, password):
     if username in users and check_password_hash(
             users[username]['password'], password):
         return username
-    return None
 
 
 @app.route('/login', methods=['POST'])
 def login():
-    if not request.is_json:
-        return jsonify({"msg": "Missing JSON in request"}), 400
+    data = request.get_json()
+    username = data.get("username")
+    password = data.get("password")
 
-    username = request.json.get('username', None)
-    password = request.json.get('password', None)
+    user = users.get(username)
+    if user and check_password_hash(user["password"], password):
+        access_token = create_access_token(identity=username)
+        return jsonify({"access_token": access_token})
 
-    if not username or not password:
-        return jsonify({"msg": "Missing username or password"}), 400
-
-    user = users.get(username, None)
-    if user and check_password_hash(user['password'], password):
-        access_token = create_access_token(
-            identity={"username": username, "role": user["role"]}
-        )
-        return jsonify(access_token=access_token), 200
-    else:
-        return jsonify({"msg": "Bad username or password"}), 401
+    return jsonify({"error": "Invalid credentials"}), 401
 
 
 @app.route('/basic-protected')
@@ -63,40 +55,37 @@ def basic_protected():
     return jsonify(message="Basic Auth: Access Granted")
 
 
-def token_verification_failed_loader(fn):
-    @jwt_required()
-    def decorator(*args, **kwargs):
-        claims = get_jwt_identity()
-        return jsonify(msg='Claims verification failed'), 401
-    return decorator
+@app.route("/jwt-protected")
+@jwt_required()
+def jwt_protected():
+    return "JWT Auth: Access Granted"
 
 
-@app.route('/admin-only')
-@token_verification_failed_loader
+@app.route("/admin-only")
 @jwt_required()
 def admin_only():
-    return jsonify(message="Admin Access: Granted")
+    current_user = get_jwt_identity()
+    user = users.get(current_user)
+    if user and user["role"] == "admin":
+        return "Admin Access: Granted"
+    else:
+        return jsonify({"error": "Forbidden"}), 403
 
 
 @jwt.unauthorized_loader
-def unauthorized_response(callback):
-    return jsonify({"msg": "Missing Authorization Header"}), 401
+def handle_unauthorized_error(err):
+    return jsonify({"error": "Missing or invalid token"}), 401
 
 
 @jwt.invalid_token_loader
-def invalid_token_response(callback):
-    return jsonify({"msg": "Invalid token"}), 401
+def handle_invalid_token_error(err):
+    return jsonify({"error": "Invalid token"}), 401
 
 
 @jwt.expired_token_loader
-def expired_token_response(callback):
-    return jsonify({"msg": "Token has expired"}), 401
+def handle_expired_token_error(err):
+    return jsonify({"error": "Token has expired"}), 401
 
 
-@jwt.revoked_token_loader
-def revoked_token_response(callback):
-    return jsonify({"msg": "Token has been revoked"}), 401
-
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)
