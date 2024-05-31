@@ -8,7 +8,6 @@ from flask_jwt_extended import (
     get_jwt_identity,
     jwt_required,
     JWTManager,
-    verify_jwt_in_request
 )
 
 
@@ -86,9 +85,15 @@ def jwt_protected():
 @jwt_required()
 def admin_only():
     current_user = get_jwt_identity()
+
+    # Check if the user exists in the users dictionary
+    if current_user not in users:
+        return jsonify({"error": "User not found"}), 404
+
+    # Check if the user's role is 'admin'
     if users[current_user]['role'] != 'admin':
         return jsonify({"error": "Admin access required"}), 403
-    return "Admin Access: Granted"
+    return jsonify({"message": "Admin Access: Granted"}), 200
 
 
 # Error handlers for various JWT errors
