@@ -97,4 +97,4 @@ def handle_expired_token_error(err):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5001)
