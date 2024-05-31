@@ -38,7 +38,12 @@ def verify_password(username, password):
     return None
 
 
-@app.route('/login')
+@app.route("/")
+def home():
+    return "Welcome to the Flask API!"
+
+
+@app.route('/login', methods=['POST'])
 def login():
     """Endpoint for user login."""
     data = request.get_json()
@@ -89,6 +94,11 @@ def handle_unauthorized_error(err):
 def handle_invalid_token_error(err):
     """Handler for invalid tokens."""
     return jsonify({"error": "Invalid token"}), 401
+
+
+@jwt.revoked_token_loader
+def handle_revoked_token_error(err):
+    return jsonify({"error": "Token has been revoked"}), 401
 
 
 @jwt.expired_token_loader
