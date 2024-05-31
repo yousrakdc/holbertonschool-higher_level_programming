@@ -32,9 +32,10 @@ users = {
 @auth.verify_password
 def verify_password(username, password):
     """Verify the username and password."""
-    if username in users and check_password_hash(
+    if users and check_password_hash(
             users[username]['password'], password):
         return username
+    return None
 
 
 @app.route('/login', methods=['POST'])
@@ -97,4 +98,4 @@ def handle_expired_token_error(err):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5001)
+    app.run()
