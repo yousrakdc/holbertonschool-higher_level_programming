@@ -62,27 +62,17 @@ def basic_protected():
     return jsonify(message="Basic Auth: Access Granted")
 
 
-@app.route('/jwt-protected')
-@jwt_required()
-def jwt_protected():
-    current_user = get_jwt_identity()
-    return jsonify(message="JWT Auth: Access Granted", user=current_user)
-
-
-def role_required(role):
-    def wrapper(fn):
-        @jwt_required()
-        def decorator(*args, **kwargs):
-            claims = get_jwt_identity()
-            if claims['role'] != role:
-                return jsonify(msg='Unauthorized'), 403
-            return fn(*args, **kwargs)
-        return decorator
-    return wrapper
+def token_verification_failed_loader(fn):
+    @jwt_required()
+    def decorator(*args, **kwargs):
+        claims = get_jwt_identity()
+        return jsonify(msg='Claims verification failed'), 401
+    return decorator
 
 
 @app.route('/admin-only')
-@role_required('admin')
+@token_verification_failed_loader
+@jwt_required()
 def admin_only():
     return jsonify(message="Admin Access: Granted")
 
@@ -105,11 +95,6 @@ def expired_token_response(callback):
 @jwt.revoked_token_loader
 def revoked_token_response(callback):
     return jsonify({"msg": "Token has been revoked"}), 401
-
-
-@jwt.claims_verification_failed_loader
-def claims_verification_failed_response(callback):
-    return jsonify({"msg": "Claims verification failed"}), 401
 
 
 if __name__ == '__main__':
