@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """takes in an argument and displays all values in the states table"""
 
+
 import MySQLdb
 import sys
 
