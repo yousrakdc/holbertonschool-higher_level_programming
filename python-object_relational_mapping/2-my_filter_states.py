@@ -12,7 +12,7 @@ if __name__ == "__main__":
                          passwd=sys.argv[2], db=sys.argv[3])
     cursor = db.cursor()
     cursor.execute("SELECT * FROM states WHERE name = '{}'"
-                   "ORDER BY states.id LIMIT 1".format(sys.argv[4]))
+                   " ORDER BY states.id".format(sys.argv[4]))
     rows = cursor.fetchall()
     for row in rows:
         print(row)
