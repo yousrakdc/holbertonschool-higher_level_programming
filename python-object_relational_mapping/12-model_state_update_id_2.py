@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 """prints the State object with the name passed as argument from database"""
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, insert
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
 from model_state import Base, State
 import sys
 
