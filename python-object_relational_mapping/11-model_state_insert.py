@@ -16,7 +16,7 @@ if __name__ == "__main__":
     db_session.add(State(name="Louisiana"))
     db_session.commit()
     louisiana = db_session.query(State).filter(State.name ==
-                                            "Louisiana").first()
+                                               "Louisiana").first()
 
     print(louisiana.id)
     db_session.close()
