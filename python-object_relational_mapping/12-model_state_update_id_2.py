@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""prints the State object with the name passed as argument from database"""
+"""changes the name of a State object from the database"""
 
 from sqlalchemy import create_engine, insert
 from sqlalchemy.orm import sessionmaker
@@ -9,14 +9,11 @@ import sys
 
 if __name__ == "__main__":
     engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'
-                           .format(sys.argv[1], sys.argv[2], sys.argv[3])
-                           , pool_pre_ping=True)
+                           .format(sys.argv[1], sys.argv[2], sys.argv[3]))
 
     Session = sessionmaker(bind=engine)
     db_session = Session()
-
-    db_session.add(State(name="Louisiana"))
-
+    db_session = Session()
     db_session.query(State).filter(
         State.id == 2).update({"name": "New Mexico"})
     db_session.commit()
