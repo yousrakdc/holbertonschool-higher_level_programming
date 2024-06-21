@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""creates the State “California” with the City “San Francisco” 
+"""creates the State “California” with the City “San Francisco”
 from the database """
 
 from sys import argv, exit
@@ -11,7 +11,7 @@ from sqlalchemy.orm import sessionmaker
 import sys
 
 if __name__ == "__main__":
-    
+
     if len(argv) != 4:
         exit('Use: 100-relationship_states_cities.py <mysql username> '
              '<mysql password> <database name>')
@@ -21,6 +21,7 @@ if __name__ == "__main__":
 
     Session = sessionmaker(bind=engine)
     db_session = Session()
+    Base.metadata.create_all(engine)
 
     new_state = State(name='California')
     new_city = City(name='San Francisco', state_id=new_state.id)
