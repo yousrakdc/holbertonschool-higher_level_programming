@@ -5,12 +5,10 @@ import sqlite3
 
 app = Flask(__name__)
 
-# Function to read data from JSON file
 def read_json_file(filename):
     with open(filename, 'r') as f:
         return json.load(f)
 
-# Function to read data from CSV file
 def read_csv_file(filename):
     products = []
     with open(filename, 'r') as f:
@@ -24,23 +22,27 @@ def read_csv_file(filename):
             })
     return products
 
-# Function to fetch product data from SQLite database
-def get_products_from_db():
+def read_sql_data():
     try:
         conn = sqlite3.connect('products.db')
         cursor = conn.cursor()
-        cursor.execute('SELECT * FROM Products')
-        products = cursor.fetchall()
-        conn.close()
-        return [{
-            "id": product[0],
-            "name": product[1],
-            "category": product[2],
-            "price": float(product[3])
-        } for product in products]
+        cursor.execute("SELECT id, name, category, price FROM products")
+        rows = cursor.fetchall()
+        products = []
+        for row in rows:
+            products.append({
+                "id": row[0],
+                "name": row[1],
+                "category": row[2],
+                "price": row[3]
+            })
+        return products
     except sqlite3.Error as e:
-        print(f"SQLite error occurred: {e}")
+        print(f"Database error: {e}")
         return None
+    finally:
+        if conn:
+            conn.close()
 
 @app.route('/products')
 def products():
@@ -52,9 +54,9 @@ def products():
     elif source == 'csv':
         data = read_csv_file('products.csv')
     elif source == 'sql':
-        data = get_products_from_db()
+        data = read_sql_data()
         if data is None:
-            return render_template('product_display.html', error="Database error occurred")
+            return render_template('product_display.html', error="Database error")
     else:
         return render_template('product_display.html', error="Wrong source")
 
