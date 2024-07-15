@@ -6,12 +6,16 @@ app = Flask(__name__)
 
 # Function to fetch product data from SQLite database
 def get_products_from_db():
-    conn = sqlite3.connect('products.db')
-    cursor = conn.cursor()
-    cursor.execute('SELECT * FROM Products')
-    products = cursor.fetchall()
-    conn.close()
-    return products
+    try:
+        conn = sqlite3.connect('products.db')
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM Products')
+        products = cursor.fetchall()
+        conn.close()
+        return products
+    except sqlite3.Error as e:
+        print(f"SQLite error occurred: {e}")
+        return None
 
 # Route to display product data based on source query parameter
 @app.route('/products')
@@ -20,7 +24,10 @@ def display_products():
 
     if source == 'sql':
         products = get_products_from_db()
-        return render_template('product_display.html', products=products)
+        if products is not None:
+            return render_template('product_display.html', products=products)
+        else:
+            return render_template('error.html', message='Database error occurred')
     else:
         return render_template('error.html', message='Wrong source')
 
