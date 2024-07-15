@@ -1,49 +1,48 @@
-from flask import Flask, render_template, request
-import json
-import csv
+from flask import Flask, render_template, request, jsonify
 import sqlite3
+import csv
 
 app = Flask(__name__)
 
-# Function to read data from SQLite database
-def read_sqlite_data():
+# Function to fetch data from SQLite database
+def fetch_data_from_sqlite():
     conn = sqlite3.connect('products.db')
     cursor = conn.cursor()
-    cursor.execute('SELECT * FROM Products')
-    products = cursor.fetchall()
+    cursor.execute('SELECT id, name, category, price FROM Products')
+    data = cursor.fetchall()
     conn.close()
-    return [{
-        "id": product[0],
-        "name": product[1],
-        "category": product[2],
-        "price": float(product[3])
-    } for product in products]
+    return data
 
+# Function to fetch data from JSON file (assuming data.json exists)
+def fetch_data_from_json():
+    # Replace with actual JSON data loading logic
+    return []
+
+# Function to fetch data from CSV file (assuming data.csv exists)
+def fetch_data_from_csv():
+    # Replace with actual CSV data loading logic
+    return []
+
+# Route to handle displaying products
 @app.route('/products')
-def products():
+def display_products():
     source = request.args.get('source')
 
     if source == 'json':
-        with open('products.json', 'r') as f:
-            data = json.load(f)
+        data = fetch_data_from_json()
     elif source == 'csv':
-        with open('products.csv', 'r') as f:
-            reader = csv.DictReader(f)
-            data = [{
-                "id": int(row["id"]),
-                "name": row["name"],
-                "category": row["category"],
-                "price": float(row["price"])
-            } for row in reader]
+        data = fetch_data_from_csv()
     elif source == 'sql':
-        try:
-            data = read_sqlite_data()
-        except sqlite3.Error as e:
-            return render_template('product_display.html', error=f"SQLite Error: {str(e)}")
+        data = fetch_data_from_sqlite()
     else:
-        return render_template('product_display.html', error="Wrong source")
+        return render_template('error.html', message='Wrong source')
 
     return render_template('product_display.html', products=data)
+
+# Error handling for database-related issues
+@app.errorhandler(sqlite3.Error)
+def handle_database_error(error):
+    return render_template('error.html', message='Database error: {}'.format(error))
 
 if __name__ == '__main__':
     app.run(debug=True)
