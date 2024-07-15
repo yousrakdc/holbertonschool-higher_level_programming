@@ -20,6 +20,7 @@ x<!DOCTYPE html>
             <tbody>
                 {% for product in products %}
                     <tr>
+                        <td>{{ product.id }}</td>
                         <td>{{ product.name }}</td>
                         <td>{{ product.category }}</td>
                         <td>{{ product.price }}</td>
